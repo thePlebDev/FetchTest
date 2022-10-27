@@ -15,7 +15,8 @@ class RemoteRepositoryImpl(
         try{
             emit(UIResponse.Loading)
             val body = api.getPosts().body()!!
-            val list = sortBlankNull(body)
+            val nonNullList = sortBlankNull(body)
+            val list = sortById(nonNullList)
             emit(UIResponse.Success(list))
         }catch (e:Exception){
             emit(UIResponse.Failure(e))
@@ -24,6 +25,11 @@ class RemoteRepositoryImpl(
 
     private fun sortBlankNull(list:List<FetchItem>):List<FetchItem>{
         val data = list.filter {  !it.name.isNullOrBlank() }
+        return data
+    }
+    //todo: THIS IS THE SAME AS SORT BY NAME
+    private fun sortById(list:List<FetchItem>):List<FetchItem>{
+        val data = list.sortedBy {  it.id }
         return data
     }
 }

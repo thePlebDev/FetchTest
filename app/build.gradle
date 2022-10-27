@@ -8,7 +8,8 @@ plugins {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33 //had to change this the 33 from 32 because of the pagination libraries
+    namespace 'com.elliottsoftware.fetchtest'
 
     buildFeatures {
         viewBinding true
@@ -63,6 +64,7 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
     def nav_version = "2.5.2"
+    def paging_version = "3.1.1"
 
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
@@ -150,8 +152,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation "com.squareup.okhttp3:okhttp:4.9.0"
 
-
-
+    //PAGINATION
+    implementation "androidx.paging:paging-runtime-ktx:$paging_version"
+    // alternatively - without Android dependencies for tests
+    testImplementation "androidx.paging:paging-common-ktx:$paging_version"
+    // optional - Jetpack Compose integration
+    implementation "androidx.paging:paging-compose:1.0.0-alpha17"
 
 
 
