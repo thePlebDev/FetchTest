@@ -7,9 +7,11 @@ import com.elliottsoftware.fetchtest.domain.models.UIResponse
 import com.elliottsoftware.fetchtest.domain.repositories.RemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class RemoteRepositoryImpl(
-    val api: FetchApi = RetrofitInstance.api
+class RemoteRepositoryImpl
+    @Inject constructor(
+    val api: FetchApi
 ):RemoteRepository {
     override suspend fun getList() = flow {
         try{
