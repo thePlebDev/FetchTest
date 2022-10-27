@@ -7,11 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.compose.material.Text
 import androidx.compose.ui.platform.ViewCompositionStrategy
+import androidx.fragment.app.viewModels
 import androidx.navigation.findNavController
 import com.elliottsoftware.fetchtest.R
 import com.elliottsoftware.fetchtest.databinding.FragmentListBinding
 import com.elliottsoftware.fetchtest.presentation.components.list.ListView
 import com.elliottsoftware.fetchtest.presentation.components.main.MainView
+import com.elliottsoftware.fetchtest.presentation.viewModels.ListViewModel
+import dagger.hilt.android.AndroidEntryPoint
+import androidx.hilt.navigation.compose.hiltViewModel
 
 
 /**
@@ -19,6 +23,7 @@ import com.elliottsoftware.fetchtest.presentation.components.main.MainView
  * Use the [ListFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
+@AndroidEntryPoint
 class ListFragment : Fragment() {
 
     var _binding:FragmentListBinding? = null
@@ -43,7 +48,9 @@ class ListFragment : Fragment() {
             // is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-                ListView()
+
+                 val viewModel: ListViewModel by viewModels()
+                ListView(viewModel)
             }
         }
         return view

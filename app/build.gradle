@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 
 
 }
@@ -56,6 +57,10 @@ android {
         }
     }
 
+}
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }
 
 dependencies {
@@ -158,6 +163,11 @@ dependencies {
     testImplementation "androidx.paging:paging-common-ktx:$paging_version"
     // optional - Jetpack Compose integration
     implementation "androidx.paging:paging-compose:1.0.0-alpha17"
+
+    //DAGGER HILT
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
 
 
 

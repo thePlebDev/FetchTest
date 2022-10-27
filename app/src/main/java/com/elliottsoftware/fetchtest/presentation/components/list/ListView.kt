@@ -25,7 +25,7 @@ import com.elliottsoftware.fetchtest.presentation.components.main.NavButton
 import com.elliottsoftware.fetchtest.presentation.viewModels.ListViewModel
 
 @Composable
-fun ListView(viewModel: ListViewModel = viewModel()){
+fun ListView(viewModel: ListViewModel){
 
     Column(horizontalAlignment = Alignment.CenterHorizontally) {
         when(val response = viewModel.state.value.listData){
@@ -56,47 +56,47 @@ fun MoreList(list:List<FetchItem>){
 
 }
 
-@Composable
-fun MessageList(viewModel: ListViewModel = viewModel()) {
-    val fetchItems = viewModel.items.collectAsLazyPagingItems()
-    LazyColumn(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(
-                horizontal = 16.dp,
-                vertical = 32.dp
-            ),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        when (val state = fetchItems.loadState.prepend) {
-            is LoadState.NotLoading -> Unit
-            is LoadState.Loading -> {
-                Log.d("refresh","PREPEND")
-                Loading()
-            }
-            is LoadState.Error -> {
-                Log.e("Error prepend","Error prepend")
-            }
-        }
-        when (val state = fetchItems.loadState.refresh) {
-            is LoadState.NotLoading -> Unit
-            is LoadState.Loading -> {
-                Log.d("refresh","refresh")
-                Loading()
-            }
-            is LoadState.Error -> {
-                Log.e("Error refresh","Error refresh")
-            }
-        }
-        items(
-            items = fetchItems,
-            key = { it.id }
-        ) {
-            FetchItemRow(item = it)
-        }
-
-    }
-}
+//@Composable
+//fun MessageList(viewModel: ListViewModel = viewModel()) {
+//    val fetchItems = viewModel.items.collectAsLazyPagingItems()
+//    LazyColumn(
+//        modifier = Modifier
+//            .fillMaxSize()
+//            .padding(
+//                horizontal = 16.dp,
+//                vertical = 32.dp
+//            ),
+//        horizontalAlignment = Alignment.CenterHorizontally
+//    ) {
+//        when (val state = fetchItems.loadState.prepend) {
+//            is LoadState.NotLoading -> Unit
+//            is LoadState.Loading -> {
+//                Log.d("refresh","PREPEND")
+//                Loading()
+//            }
+//            is LoadState.Error -> {
+//                Log.e("Error prepend","Error prepend")
+//            }
+//        }
+//        when (val state = fetchItems.loadState.refresh) {
+//            is LoadState.NotLoading -> Unit
+//            is LoadState.Loading -> {
+//                Log.d("refresh","refresh")
+//                Loading()
+//            }
+//            is LoadState.Error -> {
+//                Log.e("Error refresh","Error refresh")
+//            }
+//        }
+//        items(
+//            items = fetchItems,
+//            key = { it.id }
+//        ) {
+//            FetchItemRow(item = it)
+//        }
+//
+//    }
+//}
 
 private fun LazyListScope.Loading() {
     item {
