@@ -3,7 +3,6 @@ package com.elliottsoftware.fetchtest.di
 import com.elliottsoftware.fetchtest.data.remote.FetchApi
 import com.elliottsoftware.fetchtest.data.repositories.RemoteRepositoryImpl
 import com.elliottsoftware.fetchtest.domain.repositories.RemoteRepository
-import com.elliottsoftware.fetchtest.domain.useCases.GetListUseCase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -39,12 +38,5 @@ object AppModule {
     }
 
 
-    @Provides
-    fun getListUseCase(
-        remoteRepository: RemoteRepository
-    ): GetListUseCase {
-        return GetListUseCase(
-            remoteRepository
-        )
-    }
+
 }

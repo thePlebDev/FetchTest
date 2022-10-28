@@ -10,7 +10,7 @@ import androidx.paging.cachedIn
 import com.elliottsoftware.fetchtest.data.models.FetchItem
 import com.elliottsoftware.fetchtest.data.repositories.TestFetchItemRepository
 import com.elliottsoftware.fetchtest.domain.models.UIResponse
-import com.elliottsoftware.fetchtest.domain.useCases.GetListUseCase
+import com.elliottsoftware.fetchtest.domain.repositories.RemoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.Flow
@@ -27,7 +27,7 @@ data class ListViewUIState(
 @HiltViewModel
 class ListViewModel
     @Inject constructor(
-    val getListUseCase: GetListUseCase ,
+    val remoteRepository: RemoteRepository ,
    // val repository: TestFetchItemRepository = TestFetchItemRepository()
 
 ): ViewModel() {
@@ -49,7 +49,7 @@ class ListViewModel
     }
 
     fun getList() = viewModelScope.launch{
-        getListUseCase().collect{ list ->
+        remoteRepository.getList().collect{ list ->
             state.value = state.value.copy(listData = list)
         }
     }
