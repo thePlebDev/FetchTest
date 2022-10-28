@@ -36,6 +36,7 @@ class ListViewModelTest {
 
 //    val expectedItemList = listOf(FetchItem(id=0, listId = 0, name = "0"),)
 //
+    //TODO: FIND A BETTER WAY TO TEST, LOOK IN TO TURBINE LIBRARY. VERSION2 OF APP
     @Test
     fun getListTest() = runTest {
        // val items = viewModel.getList()
