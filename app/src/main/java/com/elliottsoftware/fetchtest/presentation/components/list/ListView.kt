@@ -27,9 +27,9 @@ import com.elliottsoftware.fetchtest.presentation.viewModels.ListViewModel
 @Composable
 fun ListView(viewModel: ListViewModel){
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(horizontalAlignment = Alignment.CenterHorizontally,verticalArrangement = Arrangement.Center) {
         when(val response = viewModel.state.value.listData){
-            is UIResponse.Loading -> CircularProgressIndicator()
+            is UIResponse.Loading ->   LoadingAnimation()
             is UIResponse.Success ->{
                 MoreList(response.data)
 

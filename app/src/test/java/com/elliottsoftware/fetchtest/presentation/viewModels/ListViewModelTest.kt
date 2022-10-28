@@ -39,7 +39,6 @@ class ListViewModelTest {
     //TODO: FIND A BETTER WAY TO TEST, LOOK IN TO TURBINE LIBRARY. VERSION2 OF APP
     @Test
     fun getListTest() = runTest {
-       // val items = viewModel.getList()
     Assert.assertEquals(UIResponse.Loading, viewModel.state.value.listData)
     delay(2000)
     Assert.assertEquals(UIResponse.Success(listOf(FetchItem(1,1,"1"))), viewModel.state.value.listData)
