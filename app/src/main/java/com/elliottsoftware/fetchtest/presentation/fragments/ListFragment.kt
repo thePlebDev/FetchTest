@@ -48,8 +48,7 @@ class ListFragment : Fragment() {
             // is destroyed
             setViewCompositionStrategy(ViewCompositionStrategy.DisposeOnViewTreeLifecycleDestroyed)
             setContent {
-
-                 val viewModel: ListViewModel by viewModels()
+                val viewModel: ListViewModel by viewModels()
                 ListView(viewModel)
             }
         }
