@@ -21,7 +21,7 @@ import javax.inject.Inject
 private const val ITEMS_PER_PAGE = 20
 
 data class ListViewUIState(
-    val listData:UIResponse<List<FetchItem>> = UIResponse.Loading
+    val listData:UIResponse<List<FetchItem>> = UIResponse.Failure(Exception())
 )
 
 @HiltViewModel
@@ -44,9 +44,9 @@ class ListViewModel
 //        .cachedIn(GlobalScope)
 
 
-    init{
-        getList()
-    }
+//    init{
+//        getList()
+//    }
 
     fun getList() = viewModelScope.launch{
         remoteRepository.getList().collect{ list ->

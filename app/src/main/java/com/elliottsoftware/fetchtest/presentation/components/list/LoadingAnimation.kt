@@ -66,7 +66,7 @@ fun LoadingAnimation(
                         translationY = -value * distance
                     }
                     .background(
-                        color = circleColor,
+                        color = Color(red = 255, green = 169, blue = 0),
                         shape = CircleShape
                     )
             )

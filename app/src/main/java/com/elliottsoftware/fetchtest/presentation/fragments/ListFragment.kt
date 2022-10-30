@@ -1,5 +1,6 @@
 package com.elliottsoftware.fetchtest.presentation.fragments
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -32,6 +33,7 @@ class ListFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_USER)
 
     }
 

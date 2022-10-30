@@ -1,5 +1,6 @@
 package com.elliottsoftware.fetchtest.presentation.fragments
 
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -21,9 +22,12 @@ class MainFragment : Fragment() {
     var _binding:FragmentMainBinding? = null
     val binding get() = _binding!!
 
+   // Activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED);
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activity?.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LOCKED)
     }
 
     override fun onCreateView(

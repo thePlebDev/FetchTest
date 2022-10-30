@@ -115,10 +115,11 @@ fun FinishButton(
             Button(
                 onClick = { onNavigate(R.id.action_mainFragment_to_listFragment) },
                 colors = ButtonDefaults.buttonColors(
-                    contentColor = Color.White
+                    backgroundColor = Color(red = 255, green = 169, blue = 0)
+
                 )
             ) {
-                Text(text = "Get Data")
+                Text(text = "Get Data", color = Color(red=48, green = 13,blue=56))
             }
         }
     }
