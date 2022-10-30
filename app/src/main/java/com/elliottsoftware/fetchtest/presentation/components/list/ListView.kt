@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.elliottsoftware.fetchtest.data.models.FetchItem
@@ -44,7 +45,6 @@ fun ListView(viewModel: ListViewModel){
             }
         }
 
-       // MessageList()
 
 
     }
@@ -54,7 +54,6 @@ fun ListView(viewModel: ListViewModel){
 @Composable
 fun Fail(viewModel: ListViewModel){
     val state = rememberDraggableState(
-
         onDelta = {}
     )
     Column(modifier = Modifier
@@ -69,10 +68,16 @@ fun Fail(viewModel: ListViewModel){
 
 
     ) {
-        Text(text = "Error! Please check internet connection")
-        Text(text = "Pull down to refresh")
+        Text(
+            text = "Error! Please check internet connection",
+            style= MaterialTheme.typography.h6, modifier = Modifier.padding(top = 20.dp))
+        Text(
+            text = "Pull down to refresh",
+            style= MaterialTheme.typography.subtitle1,
+            modifier = Modifier.padding(top = 20.dp)
+        )
         Icon(Icons.Rounded.Refresh,
-            contentDescription = "Localized description",
+            contentDescription = "Something went wrong please check internet connection and pull down to refresh",
             tint = Color(red = 255, green = 169, blue = 0),
             modifier = Modifier.size(128.dp)
         )
@@ -90,53 +95,7 @@ fun MoreList(list:List<FetchItem>){
 
 }
 
-//@Composable
-//fun MessageList(viewModel: ListViewModel = viewModel()) {
-//    val fetchItems = viewModel.items.collectAsLazyPagingItems()
-//    LazyColumn(
-//        modifier = Modifier
-//            .fillMaxSize()
-//            .padding(
-//                horizontal = 16.dp,
-//                vertical = 32.dp
-//            ),
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ) {
-//        when (val state = fetchItems.loadState.prepend) {
-//            is LoadState.NotLoading -> Unit
-//            is LoadState.Loading -> {
-//                Log.d("refresh","PREPEND")
-//                Loading()
-//            }
-//            is LoadState.Error -> {
-//                Log.e("Error prepend","Error prepend")
-//            }
-//        }
-//        when (val state = fetchItems.loadState.refresh) {
-//            is LoadState.NotLoading -> Unit
-//            is LoadState.Loading -> {
-//                Log.d("refresh","refresh")
-//                Loading()
-//            }
-//            is LoadState.Error -> {
-//                Log.e("Error refresh","Error refresh")
-//            }
-//        }
-//        items(
-//            items = fetchItems,
-//            key = { it.id }
-//        ) {
-//            FetchItemRow(item = it)
-//        }
-//
-//    }
-//}
 
-private fun LazyListScope.Loading() {
-    item {
-        LinearProgressIndicator()
-    }
-}
 
 @Composable
 fun FetchItemRow(item:FetchItem?){
