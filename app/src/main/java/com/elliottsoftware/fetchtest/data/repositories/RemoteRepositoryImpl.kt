@@ -1,11 +1,11 @@
 package com.elliottsoftware.fetchtest.data.repositories
 
+import android.util.Log
 import com.elliottsoftware.fetchtest.data.models.FetchItem
 import com.elliottsoftware.fetchtest.data.remote.FetchApi
-import com.elliottsoftware.fetchtest.data.remote.RetrofitInstance
+import com.elliottsoftware.fetchtest.data.util.DataFiltering
 import com.elliottsoftware.fetchtest.domain.models.UIResponse
 import com.elliottsoftware.fetchtest.domain.repositories.RemoteRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -17,21 +17,16 @@ class RemoteRepositoryImpl
         try{
             emit(UIResponse.Loading)
             val body = api.getPosts().body()!!
-            val nonNullList = sortBlankNull(body)
-            val list = sortById(nonNullList)
-            emit(UIResponse.Success(list))
+           val nonNullData = DataFiltering.sortBlankNull(body)
+            val listIdData = DataFiltering.sortByListId(nonNullData)
+            val sortedByName = DataFiltering.sortByName(listIdData)
+
+            emit(UIResponse.Success(sortedByName))
         }catch (e:Exception){
+            Log.e("RemoteRepositoryImplError",e.message.toString())
             emit(UIResponse.Failure(e))
         }
     }
 
-    private fun sortBlankNull(list:List<FetchItem>):List<FetchItem>{
-        val data = list.filter {  !it.name.isNullOrBlank() }
-        return data
-    }
-    //todo: THIS IS THE SAME AS SORT BY NAME
-    private fun sortById(list:List<FetchItem>):List<FetchItem>{
-        val data = list.sortedBy {  it.id }
-        return data
-    }
+
 }
